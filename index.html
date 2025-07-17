@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia do Programador Python</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .header h1 {
+            color: #ffd700;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section h2 {
+            color: #1e3c72;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #ffd700;
+            padding-bottom: 10px;
+        }
+        
+        .section h3 {
+            color: #2a5298;
+            font-size: 1.5rem;
+            margin: 25px 0 15px 0;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4a 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #f39c12;
+            color: #2c3e50;
+        }
+        
+        .code-block {
+            background: #2c3e50;
+            color: #ffd700;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            border: 2px solid #34495e;
+            
+        }
+        
+        .code-block::before {
+            content: "Python";
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: #1e3c72;
+            color: #ffd700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        
+        .python-keyword {
+            color: #3498db;
+            font-weight: bold;
+        }
+        
+        .python-string {
+            color: #2ecc71;
+        }
+        
+        .python-comment {
+            color: #95a5a6;
+            font-style: italic;
+        }
+        
+        .example {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #ffd700;
+        }
+        
+        .example h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .interactive-demo {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4a 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+            color: #2c3e50;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #ffd700;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 10px;
+            transition: transform 0.2s;
+            font-weight: bold;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .input-group {
+            margin: 15px 0;
+        }
+        
+        .input-group input {
+            padding: 10px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin: 5px;
+        }
+        
+        .result {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 2px solid #ffd700;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+            
+        }
+        
+        .nav-tab {
+            padding: 10px 20px;
+            background: #f8f9fa;
+            border: none;
+            cursor: pointer;
+            margin-right: 1px;
+            border-radius: 8px 8px 0 0;
+            transition: all 0.3s;
+            color: #2c3e50;
+        }
+        
+        .nav-tab.active {
+            background: #1e3c72;
+            color: #ffd700;
+        }
+        
+        .tab-content {
+            display: none;
+            
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .concept-card {
+            min-width: 0; /* ESSENCIAL pro grid funcionar direito */
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 5px solid #1e3c72;
+            transition: transform 0.3s;
+        }
+        
+        .concept-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .python-logo {
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+        
+        .snake-emoji {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .hamburger-menu {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger-menu:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        
+        .hamburger-icon {
+            width: 30px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .hamburger-line {
+            width: 100%;
+            height: 3px;
+            background: #ffd700;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger-menu.active .hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        
+        .hamburger-menu.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger-menu.active .hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+        
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            z-index: 999;
+            transition: left 0.3s ease;
+            padding: 80px 20px 20px 20px;
+            box-shadow: 5px 0 20px rgba(0,0,0,0.3);
+        }
+        
+        .sidebar.active {
+            left: 0;
+        }
+        
+        .sidebar h3 {
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 15px;
+        }
+        
+        .sidebar-menu a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .sidebar-menu a:hover {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            transform: translateX(5px);
+        }
+        
+        .sidebar-menu a::before {
+            content: "🐍";
+            margin-right: 10px;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu Hambúrguer -->
+    <div class="hamburger-menu" onclick="toggleSidebar()">
+        <div class="hamburger-icon">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+        </div>
+    </div>
+    
+    <!-- Overlay -->
+    <div class="overlay" onclick="closeSidebar()"></div>
+    
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3>🐍 Menu Python</h3>
+        <ul class="sidebar-menu">
+            <li><a href="#" onclick="scrollToSection('por-que-python')">Por que Python?</a></li>
+            <li><a href="#" onclick="scrollToSection('fundamentos')">Fundamentos</a></li>
+            <li><a href="#" onclick="scrollToSection('projetos')">Projetos Práticos</a></li>
+            <li><a href="#" onclick="scrollToSection('bibliotecas')">Bibliotecas</a></li>
+            <li><a href="#" onclick="scrollToSection('proximos-passos')">Próximos Passos</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1><span class="python-logo">🐍</span>Guia do Programador Python</h1>
+            <p>Domine a linguagem mais popular do mundo</p>
+        </div>
+
+        <div class="content">
+            <div class="section" id="por-que-python">
+                <h2>🎯 Por que Python?</h2>
+                <p>Python é uma linguagem de programação de alto nível, interpretada e de propósito geral. Criada por Guido van Rossum em 1991, Python se tornou uma das linguagens mais populares do mundo devido à sua sintaxe clara e legível.</p>
+                
+                <div class="highlight">
+                    <strong>💡 Filosofia Python:</strong> "Código é lido mais frequentemente do que é escrito" - por isso Python prioriza a legibilidade e simplicidade!
+                </div>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="snake-emoji">🚀</div>
+                        <h3>Fácil de Aprender</h3>
+                        <p>Sintaxe simples e intuitiva, perfeita para iniciantes</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="snake-emoji">🔧</div>
+                        <h3>Versátil</h3>
+                        <p>Web, IA, Data Science, Automação e muito mais</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="snake-emoji">📚</div>
+                        <h3>Rica Biblioteca</h3>
+                        <p>Milhares de pacotes prontos para usar</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="snake-emoji">🌍</div>
+                        <h3>Comunidade Ativa</h3>
+                        <p>Milhões de desenvolvedores ao redor do mundo</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="fundamentos">
+                <h2>🧩 Fundamentos do Python</h2>
+                
+                <div class="nav-tabs">
+                    <button class="nav-tab active" onclick="showTab('sintaxe')">Sintaxe Básica</button>
+                    <button class="nav-tab" onclick="showTab('tipos')">Tipos de Dados</button>
+                    <button class="nav-tab" onclick="showTab('controle')">Controle de Fluxo</button>
+                    <button class="nav-tab" onclick="showTab('funcoes')">Funções</button>
+                </div>
+
+                <div id="sintaxe" class="tab-content active">
+                    <div class="concept-card">
+                        <h3>📝 Sintaxe Básica</h3>
+                        <p>Python usa indentação para definir blocos de código, tornando-o visualmente organizado.</p>
+                        
+                        <div class="example">
+                            <h4>Primeiro Programa:</h4>
+                            <div class="code-block">
+<span class="python-comment"># Meu primeiro programa em Python</span>
+<span class="python-keyword">print</span>(<span class="python-string">"Olá, mundo!"</span>)
+
+<span class="python-comment"># Variáveis</span>
+nome = <span class="python-string">"João"</span>
+idade = 25
+
+<span class="python-keyword">print</span>(<span class="python-string">f"Meu nome é {nome} e tenho {idade} anos"</span>)</div>
+                        </div>
+                        
+                        <div class="highlight">
+                            <strong>🔑 Regras importantes:</strong>
+                            <ul style="margin-top: 10px;">
+                                <li>Python é case-sensitive (diferencia maiúsculas de minúsculas)</li>
+                                <li>Use 4 espaços para indentação</li>
+                                <li>Não precisa de ponto e vírgula no final das linhas</li>
+                                <li>Comentários começam com #</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tipos" class="tab-content">
+                    <div class="concept-card">
+                        <h3>🏷️ Tipos de Dados</h3>
+                        <p>Python tem vários tipos de dados nativos que facilitam o desenvolvimento.</p>
+                        
+                        <div class="code-block">
+<span class="python-comment"># Números</span>
+inteiro = 42
+decimal = 3.14
+complexo = 2 + 3j
+
+<span class="python-comment"># Texto</span>
+nome = <span class="python-string">"Python"</span>
+sobrenome = <span class="python-string">'Programming'</span>
+
+<span class="python-comment"># Booleanos</span>
+verdadeiro = <span class="python-keyword">True</span>
+falso = <span class="python-keyword">False</span>
+
+<span class="python-comment"># Listas</span>
+frutas = [<span class="python-string">"maçã"</span>, <span class="python-string">"banana"</span>, <span class="python-string">"laranja"</span>]
+
+<span class="python-comment"># Dicionários</span>
+pessoa = {
+    <span class="python-string">"nome"</span>: <span class="python-string">"João"</span>,
+    <span class="python-string">"idade"</span>: 25,
+    <span class="python-string">"cidade"</span>: <span class="python-string">"São Paulo"</span>
+}
+
+<span class="python-comment"># Tuplas (imutáveis)</span>
+coordenadas = (10, 20)</div>
+                        
+                        <div class="example">
+                            <h4>Verificando tipos:</h4>
+                            <div class="code-block">
+<span class="python-keyword">print</span>(<span class="python-keyword">type</span>(42))        <span class="python-comment"># <class 'int'></span>
+<span class="python-keyword">print</span>(<span class="python-keyword">type</span>(3.14))      <span class="python-comment"># <class 'float'></span>
+<span class="python-keyword">print</span>(<span class="python-keyword">type</span>(<span class="python-string">"Python"</span>))   <span class="python-comment"># <class 'str'></span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="controle" class="tab-content">
+                    <div class="concept-card">
+                        <h3>🔄 Controle de Fluxo</h3>
+                        
+                        <h4>Estruturas Condicionais:</h4>
+                        <div class="code-block">
+idade = 18
+
+<span class="python-keyword">if</span> idade >= 18:
+    <span class="python-keyword">print</span>(<span class="python-string">"Maior de idade"</span>)
+<span class="python-keyword">elif</span> idade >= 13:
+    <span class="python-keyword">print</span>(<span class="python-string">"Adolescente"</span>)
+<span class="python-keyword">else</span>:
+    <span class="python-keyword">print</span>(<span class="python-string">"Criança"</span>)</div>
+                        
+                        <h4>Loops:</h4>
+                        <div class="code-block">
+<span class="python-comment"># Loop for com range</span>
+<span class="python-keyword">for</span> i <span class="python-keyword">in</span> <span class="python-keyword">range</span>(5):
+    <span class="python-keyword">print</span>(<span class="python-string">f"Número: {i}"</span>)
+
+<span class="python-comment"># Loop for com lista</span>
+frutas = [<span class="python-string">"maçã"</span>, <span class="python-string">"banana"</span>, <span class="python-string">"laranja"</span>]
+<span class="python-keyword">for</span> fruta <span class="python-keyword">in</span> frutas:
+    <span class="python-keyword">print</span>(<span class="python-string">f"Eu gosto de {fruta}"</span>)
+
+<span class="python-comment"># Loop while</span>
+contador = 0
+<span class="python-keyword">while</span> contador < 3:
+    <span class="python-keyword">print</span>(<span class="python-string">f"Contador: {contador}"</span>)
+    contador += 1</div>
+                    </div>
+                </div>
+
+                <div id="funcoes" class="tab-content">
+                    <div class="concept-card">
+                        <h3>⚙️ Funções</h3>
+                        <p>Funções em Python são definidas com a palavra-chave <code>def</code>.</p>
+                        
+                        <div class="code-block">
+<span class="python-comment"># Função simples</span>
+<span class="python-keyword">def</span> saudacao(nome):
+    <span class="python-keyword">return</span> <span class="python-string">f"Olá, {nome}!"</span>
+
+<span class="python-comment"># Função com parâmetros padrão</span>
+<span class="python-keyword">def</span> calcular_potencia(base, expoente=2):
+    <span class="python-keyword">return</span> base ** expoente
+
+<span class="python-comment"># Função com múltiplos retornos</span>
+<span class="python-keyword">def</span> dividir(a, b):
+    <span class="python-keyword">if</span> b == 0:
+        <span class="python-keyword">return</span> <span class="python-keyword">None</span>, <span class="python-string">"Erro: divisão por zero"</span>
+    <span class="python-keyword">return</span> a / b, <span class="python-string">"Sucesso"</span>
+
+<span class="python-comment"># Usando as funções</span>
+<span class="python-keyword">print</span>(saudacao(<span class="python-string">"Python"</span>))
+<span class="python-keyword">print</span>(calcular_potencia(3, 3))
+resultado, status = dividir(10, 2)</div>
+                        
+                        <div class="highlight">
+                            <strong>🎯 Boas práticas:</strong>
+                            <ul style="margin-top: 10px;">
+                                <li>Use nomes descritivos para funções</li>
+                                <li>Adicione docstrings para documentar</li>
+                                <li>Mantenha funções pequenas e focadas</li>
+                                <li>Use type hints quando apropriado</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="projetos">
+                <h2>🚀 Projetos Práticos</h2>
+                
+                <div class="concept-card">
+                    <h3>Projeto 1: Calculadora Avançada</h3>
+                    <p>Vamos criar uma calculadora que pode fazer operações básicas e avançadas.</p>
+                    
+                    <div class="interactive-demo">
+                        <div class="input-group">
+                            <input type="number" id="calc-num1" placeholder="Primeiro número">
+                            <select id="calc-operacao">
+                                <option value="+">Soma (+)</option>
+                                <option value="-">Subtração (-)</option>
+                                <option value="*">Multiplicação (×)</option>
+                                <option value="/">Divisão (÷)</option>
+                                <option value="**">Potência (^)</option>
+                            </select>
+                            <input type="number" id="calc-num2" placeholder="Segundo número">
+                        </div>
+                        <button class="btn" onclick="calcular()">Calcular</button>
+                        <div class="result" id="resultado-calc">
+                            Insira os números e escolha a operação
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="concept-card">
+                    <h3>Projeto 2: Analisador de Texto</h3>
+                    <p>Analise textos contando palavras, caracteres e mais.</p>
+                    
+                    <div class="interactive-demo">
+                        <div class="input-group">
+                            <textarea id="texto-analise" placeholder="Digite seu texto aqui..." style="width: 100%; height: 100px; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; resize: vertical;"></textarea>
+                        </div>
+                        <button class="btn" onclick="analisarTexto()">Analisar Texto</button>
+                        <div class="result" id="resultado-texto">
+                            Digite um texto para análise
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="concept-card">
+                    <h3>Projeto 3: Gerador de Senha</h3>
+                    <p>Crie senhas seguras com critérios personalizados.</p>
+                    
+                    <div class="interactive-demo">
+                        <div class="input-group">
+                            <input type="number" id="senha-tamanho" placeholder="Tamanho da senha" min="4" max="50" value="12">
+                            <label style="margin: 10px;">
+                                <input type="checkbox" id="senha-maiuscula" checked> Maiúsculas
+                            </label>
+                            <label style="margin: 10px;">
+                                <input type="checkbox" id="senha-minuscula" checked> Minúsculas
+                            </label>
+                            <label style="margin: 10px;">
+                                <input type="checkbox" id="senha-numeros" checked> Números
+                            </label>
+                            <label style="margin: 10px;">
+                                <input type="checkbox" id="senha-simbolos"> Símbolos
+                            </label>
+                        </div>
+                        <button class="btn" onclick="gerarSenha()">Gerar Senha</button>
+                        <div class="result" id="resultado-senha">
+                            Configure as opções e gere sua senha
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="bibliotecas">
+                <h2>📦 Bibliotecas Essenciais</h2>
+                
+                <div class="feature-grid">
+                    <div class="concept-card">
+                        <h3>🔢 NumPy</h3>
+                        <p>Computação numérica e arrays multidimensionais.</p>
+                        <div class="code-block">
+<span class="python-keyword">import</span> numpy <span class="python-keyword">as</span> np
+
+arr = np.array([1, 2, 3, 4, 5])
+<span class="python-keyword">print</span>(arr.mean())  <span class="python-comment"># Média</span></div>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h3>🐼 Pandas</h3>
+                        <p>Análise e manipulação de dados estruturados.</p>
+                        <div class="code-block">
+<span class="python-keyword">import</span> pandas <span class="python-keyword">as</span> pd
+
+df = pd.read_csv(<span class="python-string">'dados.csv'</span>)
+<span class="python-keyword">print</span>(df.head())</div>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h3>📊 Matplotlib</h3>
+                        <p>Criação de gráficos e visualizações.</p>
+                        <div class="code-block">
+<span class="python-keyword">import</span> matplotlib.pyplot <span class="python-keyword">as</span> plt
+
+plt.plot([1, 2, 3, 4])
+plt.show()</div>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h3>🌐 Requests</h3>
+                        <p>Requisições HTTP simplificadas.</p>
+                        <div class="code-block">
+<span class="python-keyword">import</span> requests
+
+response = requests.get(<span class="python-string">'https://api.github.com'</span>)
+<span class="python-keyword">print</span>(response.json())</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="proximos-passos">
+                <h2>🎓 Próximos Passos</h2>
+                <p>Agora que você conhece os fundamentos, explore essas áreas de especialização:</p>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="snake-emoji">🤖</div>
+                        <h3>Inteligência Artificial</h3>
+                        <p>TensorFlow, PyTorch, Scikit-learn</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="snake-emoji">📊</div>
+                        <h3>Data Science</h3>
+                        <p>Pandas, NumPy, Jupyter, Matplotlib</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="snake-emoji">🌐</div>
+                        <h3>Desenvolvimento Web</h3>
+                        <p>Django, Flask, FastAPI</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="snake-emoji">🔧</div>
+                        <h3>Automação</h3>
+                        <p>Selenium, Beautiful Soup, Scrapy</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function calcular() {
+            const num1 = parseFloat(document.getElementById('calc-num1').value);
+            const num2 = parseFloat(document.getElementById('calc-num2').value);
+            const operacao = document.getElementById('calc-operacao').value;
+            const resultado = document.getElementById('resultado-calc');
+            
+            if (isNaN(num1) || isNaN(num2)) {
+                resultado.innerHTML = 'Por favor, insira números válidos!';
+                return;
+            }
+            
+            let res;
+            switch(operacao) {
+                case '+':
+                    res = num1 + num2;
+                    break;
+                case '-':
+                    res = num1 - num2;
+                    break;
+                case '*':
+                    res = num1 * num2;
+                    break;
+                case '/':
+                    if (num2 === 0) {
+                        resultado.innerHTML = 'Erro: Divisão por zero!';
+                        return;
+                    }
+                    res = num1 / num2;
+                    break;
+                case '**':
+                    res = Math.pow(num1, num2);
+                    break;
+            }
+            
+            resultado.innerHTML = `<strong>Resultado:</strong> ${num1} ${operacao} ${num2} = ${res}`;
+        }
+
+        function analisarTexto() {
+            const texto = document.getElementById('texto-analise').value;
+            const resultado = document.getElementById('resultado-texto');
+            
+            if (!texto.trim()) {
+                resultado.innerHTML = 'Por favor, insira um texto!';
+                return;
+            }
+            
+            const caracteres = texto.length;
+            const caracteresVsEspacos = texto.replace(/\s/g, '').length;
+            const palavras = texto.trim().split(/\s+/).length;
+            const paragrafos = texto.split(/\n\s*\n/).length;
+            const frases = texto.split(/[.!?]+/).length - 1;
+            
+            resultado.innerHTML = `
+                <strong>Análise do Texto:</strong><br>
+                📝 Caracteres: ${caracteres}<br>
+                🔤 Caracteres (sem espaços): ${caracteresVsEspacos}<br>
+                📖 Palavras: ${palavras}<br>
+                📄 Parágrafos: ${paragrafos}<br>
+                💬 Frases: ${frases}
+            `;
+        }
+
+        function gerarSenha() {
+            const tamanho = parseInt(document.getElementById('senha-tamanho').value);
+            const maiuscula = document.getElementById('senha-maiuscula').checked;
+            const minuscula = document.getElementById('senha-minuscula').checked;
+            const numeros = document.getElementById('senha-numeros').checked;
+            const simbolos = document.getElementById('senha-simbolos').checked;
+            const resultado = document.getElementById('resultado-senha');
+            
+            if (tamanho < 4 || tamanho > 50) {
+                resultado.innerHTML = 'Tamanho deve estar entre 4 e 50 caracteres!';
+                return;
+            }
+            
+            if (!maiuscula && !minuscula && !numeros && !simbolos) {
+                resultado.innerHTML = 'Selecione pelo menos uma opção!';
+                return;
+            }
+            
+            let caracteres = '';
+            if (maiuscula) caracteres += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            if (minuscula) caracteres += 'abcdefghijklmnopqrstuvwxyz';
+            if (numeros) caracteres += '0123456789';
+            if (simbolos) caracteres += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+            
+            let senha = '';
+            for (let i = 0; i < tamanho; i++) {
+                senha += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+            }
+            
+            resultado.innerHTML = `<strong>Senha gerada:</strong> ${senha}`;
+        }
+        
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.overlay');
+            const hamburger = document.querySelector('.hamburger-menu');
+            
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+        
+        function closeSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.overlay');
+            const hamburger = document.querySelector('.hamburger-menu');
+            
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+        
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+                closeSidebar();
+            }
+        }
+    </script>
+</body>
+</html>
