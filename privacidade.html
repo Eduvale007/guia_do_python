@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidade - Guia do Programador Python</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .header h1 {
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .privacy-icon {
+            font-size: 2.8rem;
+        }
+        
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+        }
+        
+        .nav-back {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 15px 25px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: inline-block;
+        }
+        
+        .nav-back a {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-back a:hover {
+            opacity: 0.8;
+        }
+        
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .section-title {
+            color: #2a5298;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #ffd700;
+        }
+        
+        .section-content {
+            line-height: 1.7;
+            font-size: 1rem;
+            color: #555;
+        }
+        
+        .section-content p {
+            margin-bottom: 16px;
+        }
+        
+        .section-content ul, .section-content ol {
+            margin-bottom: 16px;
+            padding-left: 25px;
+        }
+        
+        .section-content li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(120deg, #ffd700 0%, #ffed4e 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border-left: 4px solid #2a5298;
+        }
+        
+        .highlight-box p {
+            margin: 0;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .important-notice {
+            background: #e8f4fd;
+            border: 1px solid #2a5298;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .important-notice h4 {
+            color: #2a5298;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .date-info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 4px solid #2a5298;
+        }
+        
+        .contact-info {
+            background: #2a5298;
+            color: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .contact-info p {
+            margin-bottom: 10px;
+        }
+        
+        .contact-info a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+          .hamburger-menu {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger-menu:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        
+        .hamburger-icon {
+            width: 30px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .hamburger-line {
+            width: 100%;
+            height: 3px;
+            background: #ffd700;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger-menu.active .hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        
+        .hamburger-menu.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger-menu.active .hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+        
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            z-index: 999;
+            transition: left 0.3s ease;
+            padding: 80px 20px 20px 20px;
+            box-shadow: 5px 0 20px rgba(0,0,0,0.3);
+        }
+        
+        .sidebar.active {
+            left: 0;
+        }
+        
+        .sidebar h3 {
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 15px;
+        }
+        
+        .sidebar-menu a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .sidebar-menu a:hover {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            transform: translateX(5px);
+        }
+        
+        .sidebar-menu a::before {
+            content: "🐍";
+            margin-right: 10px;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .content-section {
+                padding: 25px;
+            }
+            
+            .section-title {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+        <div class="hamburger-menu" onclick="toggleSidebar()">
+        <div class="hamburger-icon">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+        </div>
+    </div>
+    
+    <!-- Overlay -->
+    <div class="overlay" onclick="closeSidebar()"></div>
+    
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3>🐍 Menu Python</h3>
+        <ul class="sidebar-menu">
+             <li><a href="index.html">Home</a></li>
+            <li><a href="historia.html">História</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+            <li><a href="privacidade.html">privacidade</a></li>
+            <li><a href="bot.html">Projeto bot em python</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+       
+
+        <div class="header">
+            <h1>
+                <span class="privacy-icon">🔒</span>
+                Política de Privacidade
+            </h1>
+            <p class="subtitle">Sua privacidade é nossa prioridade</p>
+        </div>
+
+        <div class="content-section">
+            <div class="date-info">
+                <strong>📅 Data de última atualização:</strong> [Data da última atualização]<br>
+                <strong>📅 Data de vigência:</strong> [Data de vigência]
+            </div>
+
+            <div class="important-notice">
+                <h4>⚠️ Aviso Importante</h4>
+                <p>Esta Política de Privacidade descreve como coletamos, usamos, armazenamos e protegemos suas informações pessoais quando você visita e utiliza o Guia do Programador Python.</p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">
+                📋 1. Informações que Coletamos
+            </h2>
+            <div class="section-content">
+                <div class="highlight-box">
+                    <p><strong>🛡️ Compromisso com sua Privacidade:</strong> O Guia do Programador Python não coleta, armazena ou processa nenhuma informação pessoal dos usuários.</p>
+                </div>
+
+                <h3>1.1 Informações Pessoais</h3>
+                <p><strong>NÃO coletamos:</strong></p>
+                <ul>
+                    <li>❌ Nome ou dados de identificação</li>
+                    <li>❌ Endereço de e-mail</li>
+                    <li>❌ Números de telefone</li>
+                    <li>❌ Endereços físicos</li>
+                    <li>❌ Informações de contato</li>
+                    <li>❌ Comentários ou mensagens</li>
+                </ul>
+
+                <h3>1.2 Dados de Navegação</h3>
+                <p><strong>NÃO coletamos:</strong></p>
+                <ul>
+                    <li>❌ Endereços IP</li>
+                    <li>❌ Informações do navegador</li>
+                    <li>❌ Páginas visitadas</li>
+                    <li>❌ Tempo de permanência</li>
+                    <li>❌ Histórico de navegação</li>
+                </ul>
+
+                <h3>1.3 Cookies e Rastreamento</h3>
+                <p><strong>NÃO utilizamos:</strong></p>
+                <ul>
+                    <li>❌ Cookies de rastreamento</li>
+                    <li>❌ Pixels de rastreamento</li>
+                    <li>❌ Ferramentas de análise (Google Analytics, etc.)</li>
+                    <li>❌ Tecnologias de fingerprinting</li>
+                    <li>❌ Redes de publicidade</li>
+                </ul>
+
+                <div class="important-notice">
+                    <h4>✅ O que isso significa?</h4>
+                    <p>Você pode navegar em nosso site com total tranquilidade, sabendo que nenhuma informação sua está sendo coletada, armazenada ou compartilhada. Seu acesso é completamente anônimo.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">
+                🎯 2. Como Usamos suas Informações
+            </h2>
+            <div class="section-content">
+                <div class="highlight-box">
+                    <p><strong>🎯 Simples e Direto:</strong> Como não coletamos nenhuma informação pessoal, não há dados para processar, usar ou compartilhar.</p>
+                </div>
+
+                <p><strong>Nosso site oferece:</strong></p>
+                <ul>
+                    <li>✅ <strong>Conteúdo educacional gratuito:</strong> Tutoriais e guias sobre Python</li>
+                    <li>✅ <strong>Acesso irrestrito:</strong> Todos os materiais disponíveis sem cadastro</li>
+                    <li>✅ <strong>Navegação anônima:</strong> Sua privacidade é totalmente preservada</li>
+                    <li>✅ <strong>Sem rastreamento:</strong> Não monitoramos seu comportamento</li>
+                </ul>
+
+                <p><strong>O que NÃO fazemos:</strong></p>
+                <ul>
+                    <li>❌ Criar perfis de usuários</li>
+                    <li>❌ Enviar emails ou newsletters</li>
+                    <li>❌ Personalizar conteúdo baseado em dados</li>
+                    <li>❌ Análise de comportamento</li>
+                    <li>❌ Publicidade direcionada</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">
+                🤝 3. Compartilhamento de Informações
+            </h2>
+            <div class="section-content">
+                <div class="highlight-box">
+                    <p><strong>🔒 Zero Compartilhamento:</strong> Como não coletamos informações pessoais, não há dados para compartilhar com terceiros.</p>
+                </div>
+
+                <h3>3.1 Prestadores de Serviços</h3>
+                <p><strong>✅ Transparência total:</strong></p>
+                <ul>
+                    <li>Nosso site é hospedado em serviços de infraestrutura padrão</li>
+                    <li>Não utilizamos serviços de análise de dados</li>
+                    <li>Não temos plataformas de email marketing</li>
+                    <li>Não usamos CDNs que coletam dados pessoais</li>
+                </ul>
+
+                <h3>3.2 Terceiros</h3>
+                <p><strong>❌ Nenhum compartilhamento:</strong></p>
+                <ul>
+                    <li>Não compartilhamos dados com empresas de publicidade</li>
+                    <li>Não vendemos informações para terceiros</li>
+                    <li>Não temos parcerias que envolvam troca de dados</li>
+                    <li>Não participamos de redes de dados</li>
+                </ul>
+
+                <h3>3.3 Exigências Legais</h3>
+                <p>Mesmo em caso de solicitações legais, não temos informações pessoais para fornecer, garantindo sua privacidade total.</p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">
+                🔐 4. Segurança das Informações
+            </h2>
+            <div class="section-content">
+                <p>Implementamos medidas de segurança apropriadas para proteger suas informações:</p>
+                <ul>
+                    <li><strong>Criptografia:</strong> Uso de SSL/TLS para transmissão segura de dados</li>
+                    <li><strong>Acesso restrito:</strong> Apenas pessoal autorizado tem acesso às informações</li>
+                    <li><strong>Atualizações regulares:</strong> Mantemos nossos sistemas sempre atualizados</li>
+                    <li><strong>Monitoramento:</strong> Verificação contínua de possíveis vulnerabilidades</li>
+                </ul>
+
+                <div class="important-notice">
+                    <h4>⚠️ Limitações de Segurança</h4>
+                    <p>Embora implementemos medidas de segurança robustas, nenhum sistema é 100% seguro. Não podemos garantir segurança absoluta contra todas as possíveis ameaças.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">
+                ⚖️ 5. Seus Direitos (LGPD)
+            </h2>
+            <div class="section-content">
+                <div class="highlight-box">
+                    <p><strong>✅ Seus Direitos Garantidos:</strong> Como não coletamos dados pessoais, seus direitos de privacidade estão automaticamente protegidos.</p>
+                </div>
+
+                <p>Embora a LGPD estabeleça diversos direitos relacionados ao tratamento de dados pessoais, no nosso caso:</p>
+                
+                <h3>✅ Direitos Automaticamente Garantidos:</h3>
+                <ul>
+                    <li><strong>Não há dados para acessar:</strong> Não temos informações pessoais sobre você</li>
+                    <li><strong>Não há dados para corrigir:</strong> Não armazenamos informações que possam estar incorretas</li>
+                    <li><strong>Não há dados para excluir:</strong> Não existe banco de dados com suas informações</li>
+                    <li><strong>Não há dados para portar:</strong> Não coletamos dados que possam ser transferidos</li>
+                    <li><strong>Não há processamento para se opor:</strong> Não processamos dados pessoais</li>
+                </ul>
+
+                <h3>🛡️ Proteção Proativa:</h3>
+                <p>Ao não coletar dados pessoais, oferecemos a máxima proteção possível - seus dados simplesmente não existem em nossos sistemas, eliminando qualquer risco de uso inadequado, vazamento ou compartilhamento não autorizado.</p>
+
+                <div class="important-notice">
+                    <h4>📞 Dúvidas sobre Privacidade?</h4>
+                    <p>Se você tiver qualquer dúvida sobre nossa política de não coleta de dados ou quiser confirmar que não temos informações suas, sinta-se à vontade para entrar em contato.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">
+                🍪 6. Política de Cookies
+            </h2>
+            <div class="section-content">
+                <div class="highlight-box">
+                    <p><strong>🚫 Zero Cookies:</strong> Nosso site não utiliza cookies ou tecnologias similares de rastreamento.</p>
+                </div>
+
+                <h3>6.1 O que NÃO utilizamos:</h3>
+                <ul>
+                    <li>❌ <strong>Cookies essenciais:</strong> Nosso site funciona perfeitamente sem eles</li>
+                    <li>❌ <strong>Cookies de performance:</strong> Não medimos performance através de cookies</li>
+                    <li>❌ <strong>Cookies de funcionalidade:</strong> Não armazenamos preferências do usuário</li>
+                    <li>❌ <strong>Cookies de análise:</strong> Não fazemos análise de comportamento</li>
+                    <li>❌ <strong>Cookies de publicidade:</strong> Não exibimos publicidade direcionada</li>
+                    <li>❌ <strong>Cookies de terceiros:</strong> Não permitimos cookies de outras empresas</li>
+                </ul>
+
+                <h3>6.2 Benefícios para Você:</h3>
+                <ul>
+                    <li>✅ Navegação mais rápida (sem scripts de rastreamento)</li>
+                    <li>✅ Privacidade total garantida</li>
+                    <li>✅ Sem necessidade de aceitar cookies</li>
+                    <li>✅ Sem banners de consentimento</li>
+                    <li>✅ Experiência limpa e focada no conteúdo</li>
+                </ul>
+
+                <div class="important-notice">
+                    <h4>🔍 Como Verificar?</h4>
+                    <p>Você pode verificar nas ferramentas de desenvolvedor do seu navegador que nosso site não define ou utiliza nenhum cookie. Sua navegação é completamente livre de rastreamento.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">
+                👶 7. Proteção de Menores
+            </h2>
+            <div class="section-content">
+                <p>Nosso site não é direcionado a menores de 13 anos. Não coletamos intencionalmente informações pessoais de crianças menores de 13 anos. Se descobrirmos que coletamos informações de uma criança menor de 13 anos, tomaremos medidas imediatas para excluir essas informações.</p>
+                
+                <p>Se você é pai, mãe ou responsável e acredita que seu filho forneceu informações pessoais, entre em contato conosco imediatamente.</p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">
+                🔄 8. Alterações nesta Política
+            </h2>
+            <div class="section-content">
+                <p>Esta Política de Privacidade pode ser atualizada periodicamente para refletir mudanças em nossas práticas ou por outros motivos operacionais, legais ou regulamentares.</p>
+                
+                <p>Quando fizermos alterações significativas, notificaremos você através de:</p>
+                <ul>
+                    <li>Aviso proeminente em nosso site</li>
+                    <li>Email (se você forneceu seu endereço de email)</li>
+                    <li>Atualização da data de "última atualização" no topo desta página</li>
+                </ul>
+
+                <p>Recomendamos que você revise esta política periodicamente para se manter informado sobre como protegemos suas informações.</p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">
+                🌐 9. Transferências Internacionais
+            </h2>
+            <div class="section-content">
+                <div class="highlight-box">
+                    <p><strong>🛡️ Sem Transferências:</strong> Como não coletamos dados pessoais, não há informações para transferir para outros países.</p>
+                </div>
+
+                <h3>9.1 Nossa Posição:</h3>
+                <ul>
+                    <li>✅ Não coletamos dados que possam ser transferidos</li>
+                    <li>✅ Não utilizamos serviços internacionais que processem dados pessoais</li>
+                    <li>✅ Não temos parcerias internacionais que envolvam dados de usuários</li>
+                    <li>✅ Sua privacidade não depende de acordos internacionais</li>
+                </ul>
+
+                <h3>9.2 Hospedagem:</h3>
+                <p>Embora nosso site possa ser hospedado em serviços de infraestrutura que operam globalmente, nenhuma informação pessoal é armazenada ou processada, garantindo que sua privacidade não seja afetada pela localização dos servidores.</p>
+            </div>
+        </div>
+
+        <div class="contact-info">
+            <h3>📞 Contato - Informações sobre Privacidade</h3>
+            <p>Se você tiver dúvidas sobre nossa política de não coleta de dados ou quiser confirmação sobre nossa abordagem de privacidade:</p>
+            
+            <p><strong>📧 Email:</strong> <a href="mailto:privacidade@guiapython.com.br">privacidade@guiapython.com.br</a></p>
+            <p><strong>⏰ Tempo de resposta:</strong> Respondemos às consultas em até 15 dias úteis</p>
+            
+            <div style="margin-top: 25px; padding: 20px; background: rgba(255, 255, 255, 0.1); border-radius: 10px;">
+                <h4 style="margin-bottom: 15px; color: #ffd700;">🎯 Resumo da Nossa Política:</h4>
+                <ul style="margin: 0; color: rgba(255, 255, 255, 0.9);">
+                    <li>✅ Zero coleta de dados pessoais</li>
+                    <li>✅ Zero uso de cookies de rastreamento</li>
+                    <li>✅ Zero compartilhamento de informações</li>
+                    <li>✅ Navegação 100% anônima</li>
+                    <li>✅ Privacidade garantida por design</li>
+                </ul>
+            </div>
+            
+            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">
+                <strong>Autoridade de Proteção de Dados:</strong> Caso tenha dúvidas sobre direitos de proteção de dados em geral, você pode consultar a Autoridade Nacional de Proteção de Dados (ANPD) através do site gov.br/anpd
+            </p>
+        </div>
+    </div>
+
+    <script>
+          function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.overlay');
+            const hamburger = document.querySelector('.hamburger-menu');
+            
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+        
+        function closeSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.overlay');
+            const hamburger = document.querySelector('.hamburger-menu');
+            
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+        
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+                closeSidebar();
+            }
+        }
+    </script>
+</body>
+</html>

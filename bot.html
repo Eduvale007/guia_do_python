@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia do Programador Python</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .back-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+        }
+
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+            color: #1f2937;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .section-title h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .divider {
+            height: 4px;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            border-radius: 2px;
+            margin-bottom: 30px;
+        }
+
+        .description {
+            color: #4b5563;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        .philosophy {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .philosophy-label {
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 8px;
+        }
+
+        .philosophy-text {
+            color: #78350f;
+            line-height: 1.6;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .code-container {
+            background: #1e1e1e;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .code-header {
+            background: #2d2d2d;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #404040;
+        }
+
+        .code-title {
+            color: #e5e5e5;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .copy-btn {
+            background: #007acc;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #005a9e;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            margin: 0;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        .code-block code {
+            color: inherit;
+        }
+
+          .hamburger-menu {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger-menu:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        
+        .hamburger-icon {
+            width: 30px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .hamburger-line {
+            width: 100%;
+            height: 3px;
+            background: #ffd700;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger-menu.active .hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        
+        .hamburger-menu.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger-menu.active .hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+        
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            z-index: 999;
+            transition: left 0.3s ease;
+            padding: 80px 20px 20px 20px;
+            box-shadow: 5px 0 20px rgba(0,0,0,0.3);
+        }
+        
+        .sidebar.active {
+            left: 0;
+        }
+        
+        .sidebar h3 {
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 15px;
+        }
+        
+        .sidebar-menu a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .sidebar-menu a:hover {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            transform: translateX(5px);
+        }
+        
+        .sidebar-menu a::before {
+            content: "🐍";
+            margin-right: 10px;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .main-content {
+                padding: 30px 20px;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card.large {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 1.7rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+        <div class="hamburger-menu" onclick="toggleSidebar()">
+        <div class="hamburger-icon">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+        </div>
+    </div>
+    
+    <!-- Overlay -->
+    <div class="overlay" onclick="closeSidebar()"></div>
+    
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3>🐍 Menu Python</h3>
+        <ul class="sidebar-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="historia.html">História</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+            <li><a href="privacidade.html">privacidade</a></li>
+            <li><a href="bot.html">Projeto bot em python</a></li>
+        </ul>
+    </div>
+
+
+    <div class="container">
+       
+
+        <div class="header">
+            <div class="header-icon">🤖</div>
+            <h1>Bot de Automação WhatsApp Web</h1>
+            <p>Projeto de automação desenvolvido por Eduardo</p>
+        </div>
+
+        <div class="main-content">
+            <div class="section-title">
+                <div class="section-icon">🤖</div>
+                <h2>Bot de Automação WhatsApp Web</h2>
+            </div>
+            <div class="divider"></div>
+
+            <p class="description">
+                Este projeto demonstra como criar um <strong>bot automatizado para WhatsApp Web</strong> usando Python. 
+                O script utiliza as bibliotecas pyautogui para controlar o mouse e teclado, permitindo envio automático 
+                de mensagens para uma lista de contatos.
+            </p>
+
+            <div class="philosophy">
+                <div class="philosophy-label">⚡ Funcionalidades:</div>
+                <div class="philosophy-text">
+                    Abertura automática do Chrome, acesso ao WhatsApp Web, captura de posições do mouse 
+                    e envio de mensagens personalizadas para múltiplos contatos.
+                </div>
+            </div>
+
+            <div class="code-container">
+                <div class="code-header">
+                    <span class="code-title">📄 whatsapp_bot.py</span>
+                    <button class="copy-btn" onclick="copyCode()">📋 Copiar</button>
+                </div>
+                <pre class="code-block" id="code-content"><code>import time
+import pyautogui
+import os
+import webbrowser
+
+def open_chrome():
+    time.sleep(2)
+    print('Abrindo navagador')
+    os.startfile('chrome.exe')
+    print('Navegador aberto')
+
+open_chrome()
+
+def open_whatsapp():
+    time.sleep(2)
+    print('Abrindo whatsapp no navegador')
+    webbrowser.open('https://web.whatsapp.com')
+    pyautogui.press('enter')
+    print('Whatsapp web aberto')
+
+open_whatsapp()
+
+escolha_user = input('Digite s caso queira pegar posicoes do mouse caso contrario n: ').lower()
+
+if escolha_user == 's':
+    quant_mouse = int(input('Digite a quantidade de posições que você deseja capturar do seu mouse: '))
+    
+    def pega_posicoes_mouse(quantidade):
+        pos = []
+        for i in range(quantidade):
+            print('Mova seu mouse para uma posição nesses 3 segundos')
+            time.sleep(5)
+            x, y = pyautogui.position()
+            pos.append((x, y))
+            print('Aguarde aparecer as posições do mouse')
+            print()
+            time.sleep(3)
+            print(f'valor de x = {x} e y = {y}')
+            print()
+            print(f'posiçôes x e y do mouse = {pos}')
+            print()
+        return pos
+    
+    posicoes = pega_posicoes_mouse(quant_mouse)
+    print('Posições do seu mouse: ', posicoes)
+
+else:
+    def clica_lista_contatos():
+        lista_contatos = ['Davi', 'Pedro', 'Felipe', 'Daniel'] #coloque o nome dos seus contatos aqui
+        
+        for contato in lista_contatos:
+            print(f' Verificando: {contato}')
+            
+            #valores x e y para a barra de busca do Whatsapp Web
+            pyautogui.moveTo(x=579, y=209)
+            time.sleep(1)
+            pyautogui.click(x=579, y=209)
+            pyautogui.hotkey('ctrl', 'a')
+            pyautogui.press('backspace')
+            pyautogui.write(contato, interval=0.1)
+            time.sleep(1)
+            pyautogui.press('enter')
+            time.sleep(2)
+            
+            #Valores x e y para barra de digitar mensagens do Whatsapp Web
+            pyautogui.moveTo(x=1206, y=972)
+            time.sleep(1)
+            pyautogui.click(x=1206, y=972)
+            time.sleep(1)
+            pyautogui.write('Oi eu sou um bot desenvolvido pelo Eduardo',interval=0.1)
+            time.sleep(1)
+            pyautogui.press('Enter')
+    
+    time.sleep(5)
+    clica_lista_contatos()
+    print("Todos os contatos foram verificados!")</code></pre>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">🌐</div>
+                    <h3>Automação Web</h3>
+                    <p>Controle automático do navegador Chrome e acesso ao WhatsApp Web</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🖱️</div>
+                    <h3>Controle de Mouse</h3>
+                    <p>Captura precisa de coordenadas e simulação de cliques automáticos</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">💬</div>
+                    <h3>Mensagens em Massa</h3>
+                    <p>Envio automático para múltiplos contatos com mensagem personalizada</p>
+                </div>
+
+                <div class="card large">
+                    <div class="card-icon">⚙️</div>
+                    <h3>Configuração Flexível</h3>
+                    <p>Modo interativo para capturar posições do mouse ou executar automação direta</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyCode() {
+            const codeContent = document.getElementById('code-content').textContent;
+            navigator.clipboard.writeText(codeContent).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copiado!';
+                btn.style.background = '#28a745';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '#007acc';
+                }, 2000);
+            });
+        }
+
+         function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.overlay');
+            const hamburger = document.querySelector('.hamburger-menu');
+            
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+        
+        function closeSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.overlay');
+            const hamburger = document.querySelector('.hamburger-menu');
+            
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+        
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+                closeSidebar();
+            }
+        }
+    </script>
+</body>
+</html>
